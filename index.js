@@ -89,7 +89,7 @@ function getStats(acceptsGzip, fileName, response, done) {
 
 FileServer.prototype.serveFile = function(fileName, mimeType = 'text/plain', maxAge = 0) {
     const fileServer = this;
-
+    fileName = decodeURI(fileName);
     if (!watchers[fileName]) {
         const watcher = chokidar.watch(fileName, { persistent: true, ignoreInitial: true });
         watcher.on('change', () => {
